@@ -3,7 +3,8 @@ class MenuModel {
   String harga;
   String namaMenu;
   String foto;
+  String desc;
 
   MenuModel(
-      {this.id, required this.harga, required this.namaMenu, required this.foto});
+      {this.id, required this.harga, required this.namaMenu, required this.foto , required this.desc});
 }
