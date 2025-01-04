@@ -100,26 +100,6 @@ class _Profile_UserState extends State<Profile_User> {
                       ),),
                     SizedBox(height: 50),
                     ElevatedButton(onPressed: (){
-                    if (_interstitialAd != null) {
-                        _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-                          onAdDismissedFullScreenContent: (ad) {
-                            debugPrint("Iklan ditutup oleh pengguna.");
-                            ad.dispose();
-                            loadAd();
-                          },
-                          onAdFailedToShowFullScreenContent: (ad, error) {
-                            debugPrint("Gagal menampilkan iklan: $error");
-                            ad.dispose();
-                            loadAd();
-                          },
-                        );
-
-                        _interstitialAd!.show();
-                        _interstitialAd = null;
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddMenus(),));
-                      } else {
-                        debugPrint("Iklan belum siap.");
-                      }
                       Logout(context);
                     },
                       child: Row(

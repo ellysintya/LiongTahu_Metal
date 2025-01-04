@@ -19,7 +19,6 @@ class _DataInputState extends State<DataInput> {
   TextEditingController nama = TextEditingController();
   TextEditingController harga = TextEditingController();
   TextEditingController penjualan = TextEditingController();
-  TextEditingController foto_menu = TextEditingController();
   TextEditingController jenis = TextEditingController();
   TextEditingController deskripsi = TextEditingController();
 
@@ -29,7 +28,6 @@ class _DataInputState extends State<DataInput> {
     penjualan.dispose();
     harga.dispose();
     jenis.dispose();
-    foto_menu.dispose();
     deskripsi.dispose();
     super.dispose();
   }

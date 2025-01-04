@@ -4,6 +4,8 @@ import 'package:butter_app_project/authentication/welcome.dart';
 import 'package:butter_app_project/model/save_helper.dart';
 import 'package:butter_app_project/pages/payment.dart';
 import 'package:butter_app_project/pages/profile/profile.dart';
+import 'package:butter_app_project/pages/profile/delete.dart';
+import 'package:butter_app_project/pages/profile/update.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

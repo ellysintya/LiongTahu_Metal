@@ -203,7 +203,7 @@ class _OrderBasketState extends State<OrderBasket> {
                 onPressed: snapshot.hasData && snapshot.data!.docs.isNotEmpty ? () async {
                   if (nama_kasir.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Chasier's name")),
+                      SnackBar(content: Text("Cashier's name")),
                     );
                     return;
                   } else if (selectedValue == null){

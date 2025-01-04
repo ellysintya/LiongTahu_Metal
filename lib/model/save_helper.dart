@@ -53,3 +53,13 @@ class AuthState {
     return AuthState();
   }
 }
+class ListOrder {
+  int jlh = 0 ;
+  void incrementCounter() {
+   jlh++ ;
+  }
+
+  void DecrementCounter() {
+   jlh-- ;
+  }
+}

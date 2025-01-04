@@ -48,7 +48,7 @@ class _NavBarState extends State<NavBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.paypal),
-              label: "Card",
+              label: "Payment",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

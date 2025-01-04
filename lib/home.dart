@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Dasboard_Karyawan extends StatefulWidget {
@@ -11,6 +12,7 @@ class Dasboard_Karyawan extends StatefulWidget {
 }
 
 class _Dasboard_KaryawanState extends State<Dasboard_Karyawan> {
+  InterstitialAd? _interstitialAd;
   final CollectionReference Menu = FirebaseFirestore.instance.collection(
       "Menu");
   final String gojekUrl = "https://gofood.co.id/medan/restaurant/liong-tahu-metal-jl-metal-no-9b-kelurahan-tanjung-mulia-kecamatan-medan-deli-eef5aff0-5eed-473f-9433-8fac2252cc49";
@@ -27,6 +29,25 @@ class _Dasboard_KaryawanState extends State<Dasboard_Karyawan> {
       print("Error: $e");
     }
   }
+  void loadAd() {
+    InterstitialAd.load(
+      adUnitId: "ca-app-pub-3940256099942544/1033173712",
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          setState(() {
+            _interstitialAd = ad;
+          });
+          debugPrint("Iklan berhasil dimuat.");
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          debugPrint('Iklan gagal dimuat: $error');
+          _interstitialAd = null;
+        },
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +88,30 @@ class _Dasboard_KaryawanState extends State<Dasboard_Karyawan> {
                             children: [
                               Text("Delivery to home" , style: TextStyle(color: Colors.white),),
                               IconButton(
-                                onPressed: _launchGojek,
+                                onPressed: (){
+                                  if (_interstitialAd != null) {
+                                    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+                                      onAdDismissedFullScreenContent: (ad) {
+                                        debugPrint("Iklan ditutup oleh pengguna.");
+                                        ad.dispose();
+                                        loadAd();
+                                      },
+                                      onAdFailedToShowFullScreenContent: (ad, error) {
+                                        debugPrint("Gagal menampilkan iklan: $error");
+                                        ad.dispose();
+                                        loadAd();
+                                      },
+                                    );
+
+                                    _interstitialAd!.show();
+                                    _interstitialAd = null;
+                                    _launchGojek();
+                                  } else {
+                                    _launchGojek();
+                                    debugPrint("Iklan belum siap.");
+
+                                  }
+                                },
                                 icon: Icon(Icons.arrow_forward_ios , color: Colors.white,))
                             ],
                           ),
